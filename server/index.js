@@ -8,6 +8,7 @@ import { JSONFilePreset } from 'lowdb/node';
 import { aboutStats, creatorCollections, homeData, loyaltyMissions, products } from './data.js';
 
 const app = express();
+const IS_VERCEL = Boolean(process.env.VERCEL);
 const PORT = Number(process.env.PORT) || 4000;
 const ADMIN_CONTACT_EMAIL = 'admin-inbox@vendorhub.demo';
 const __filename = fileURLToPath(import.meta.url);
@@ -691,7 +692,11 @@ if (existsSync(DIST_INDEX_PATH)) {
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`VendorHub API running on http://localhost:${PORT}`);
-  console.log(`VendorHub database path: ${DATABASE_PATH}`);
-});
+if (!IS_VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`VendorHub API running on http://localhost:${PORT}`);
+    console.log(`VendorHub database path: ${DATABASE_PATH}`);
+  });
+}
+
+export default app;
