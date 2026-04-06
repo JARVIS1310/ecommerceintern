@@ -11,6 +11,7 @@ const ADMIN_CONTACT_EMAIL = 'admin-inbox@vendorhub.demo';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DATABASE_PATH = path.join(__dirname, 'database.json');
+const DIST_PATH = path.join(__dirname, '..', 'dist');
 
 app.use(cors());
 app.use(express.json());
@@ -670,6 +671,22 @@ app.get('/api/orders/:orderId/timeline', (req, res) => {
     timeline: getOrderTimeline(order),
   });
 });
+
+app.use('/api', (_req, res) => {
+  res.status(404).json({ message: 'API endpoint not found.' });
+});
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(DIST_PATH));
+  app.get('*', (req, res) => {
+    if (req.path.startsWith('/api')) {
+      res.status(404).json({ message: 'API endpoint not found.' });
+      return;
+    }
+
+    res.sendFile(path.join(DIST_PATH, 'index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`VendorHub API running on http://localhost:${PORT}`);
