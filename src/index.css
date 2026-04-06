@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	font-family: 'Manrope', sans-serif;
+	--bg-base: #0b1220;
+	--bg-accent: #111c2f;
+	--surface: #121b2d;
+	--surface-elevated: #1a263b;
+	--text-primary: #e6edf8;
+	--text-muted: #9eb0c8;
+	--border-soft: rgba(173, 193, 223, 0.2);
+	--input-bg: #0d1627;
+	--brand-primary: #4cc9f0;
+	--brand-secondary: #8ecae6;
+	--brand-cta: #ff7b54;
+	--hero-start: #0f1f3b;
+	--hero-end: #071120;
+	--hero-glow-a: #ff9f6e;
+	--hero-glow-b: #4cc9f0;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	color: var(--text-primary);
+	overflow-x: hidden;
+	background: radial-gradient(circle at 10% 10%, #1c2f4a 0%, transparent 36%),
+		radial-gradient(circle at 80% 0%, #143e50 0%, transparent 30%),
+		var(--bg-base);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	transition: background 0.4s ease, color 0.4s ease;
+}
+
+img,
+video,
+canvas,
+svg {
+	max-width: 100%;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+	font: inherit;
+}
+
+body.mood-focus {
+	--bg-base: #0b1220;
+	--bg-accent: #111c2f;
+	--surface: #121b2d;
+	--surface-elevated: #1a263b;
+	--text-primary: #e6edf8;
+	--text-muted: #9eb0c8;
+	--border-soft: rgba(173, 193, 223, 0.2);
+	--input-bg: #0d1627;
+	--brand-primary: #4cc9f0;
+	--brand-secondary: #8ecae6;
+	--brand-cta: #ff7b54;
+	--hero-start: #0f1f3b;
+	--hero-end: #071120;
+	--hero-glow-a: #ff9f6e;
+	--hero-glow-b: #4cc9f0;
+}
+
+body.mood-adventure {
+	--bg-base: #081916;
+	--bg-accent: #0d251f;
+	--surface: #112b25;
+	--surface-elevated: #17362f;
+	--text-primary: #e1fff3;
+	--text-muted: #8ec8b2;
+	--border-soft: rgba(143, 215, 186, 0.25);
+	--input-bg: #0b1f1a;
+	--brand-primary: #06d6a0;
+	--brand-secondary: #5ce0b9;
+	--brand-cta: #ff9f1c;
+	--hero-start: #0b3028;
+	--hero-end: #03140f;
+	--hero-glow-a: #ffd166;
+	--hero-glow-b: #06d6a0;
+}
+
+body.mood-cozy {
+	--bg-base: #1a1010;
+	--bg-accent: #281717;
+	--surface: #311d1d;
+	--surface-elevated: #3c2423;
+	--text-primary: #ffece4;
+	--text-muted: #d2a897;
+	--border-soft: rgba(235, 181, 156, 0.28);
+	--input-bg: #261616;
+	--brand-primary: #ff9b71;
+	--brand-secondary: #ffc09f;
+	--brand-cta: #ff6b57;
+	--hero-start: #4a231f;
+	--hero-end: #190d0c;
+	--hero-glow-a: #ffbe98;
+	--hero-glow-b: #ffd36e;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Sora', sans-serif;
+}
+
+* {
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation: none !important;
+		transition: none !important;
+	}
+}
