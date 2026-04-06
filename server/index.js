@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import { existsSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JSONFilePreset } from 'lowdb/node';
@@ -11,7 +12,7 @@ const PORT = Number(process.env.PORT) || 4000;
 const ADMIN_CONTACT_EMAIL = 'admin-inbox@vendorhub.demo';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DATABASE_PATH = path.join(__dirname, 'database.json');
+const DATABASE_PATH = process.env.DATABASE_PATH || path.join(os.tmpdir(), 'vendorhub-database.json');
 const DIST_PATH = path.join(__dirname, '..', 'dist');
 const DIST_INDEX_PATH = path.join(DIST_PATH, 'index.html');
 
@@ -692,4 +693,5 @@ if (existsSync(DIST_INDEX_PATH)) {
 
 app.listen(PORT, () => {
   console.log(`VendorHub API running on http://localhost:${PORT}`);
+  console.log(`VendorHub database path: ${DATABASE_PATH}`);
 });
