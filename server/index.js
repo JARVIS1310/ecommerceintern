@@ -1,5 +1,6 @@
 import cors from 'cors';
 import express from 'express';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JSONFilePreset } from 'lowdb/node';
@@ -12,6 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DATABASE_PATH = path.join(__dirname, 'database.json');
 const DIST_PATH = path.join(__dirname, '..', 'dist');
+const DIST_INDEX_PATH = path.join(DIST_PATH, 'index.html');
 
 app.use(cors());
 app.use(express.json());
@@ -676,7 +678,7 @@ app.use('/api', (_req, res) => {
   res.status(404).json({ message: 'API endpoint not found.' });
 });
 
-if (process.env.NODE_ENV === 'production') {
+if (existsSync(DIST_INDEX_PATH)) {
   app.use(express.static(DIST_PATH));
   app.get('*', (req, res) => {
     if (req.path.startsWith('/api')) {
@@ -684,7 +686,7 @@ if (process.env.NODE_ENV === 'production') {
       return;
     }
 
-    res.sendFile(path.join(DIST_PATH, 'index.html'));
+    res.sendFile(DIST_INDEX_PATH);
   });
 }
 
